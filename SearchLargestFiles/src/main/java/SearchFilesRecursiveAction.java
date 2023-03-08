@@ -6,9 +6,10 @@ import java.util.concurrent.RecursiveAction;
 public class SearchFilesRecursiveAction extends RecursiveAction {
 
     private String path;
-    private long minSize = 128;
-    public SearchFilesRecursiveAction(String path) {
+    private long minSize;
+    public SearchFilesRecursiveAction(String path, long minSize) {
         this.path = path;
+        this.minSize = minSize;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class SearchFilesRecursiveAction extends RecursiveAction {
 
             for (int i=0; i<filesInFolder.length; i++) {
                 if (filesInFolder[i].isDirectory()) {
-                    SearchFilesRecursiveAction task = new SearchFilesRecursiveAction(filesInFolder[i].getAbsolutePath());
+                    SearchFilesRecursiveAction task = new SearchFilesRecursiveAction(filesInFolder[i].getAbsolutePath(), filesInFolder[i].length());
                     task.fork();
                     listTasks.add(task);
                 } else {
