@@ -28,7 +28,7 @@ public class SearchFilesRecursiveAction extends RecursiveAction {
 
             for (int i=0; i<filesInFolder.length; i++) {
                 if (filesInFolder[i].isDirectory()) {
-                    SearchFilesRecursiveAction task = new SearchFilesRecursiveAction(filesInFolder[i].getAbsolutePath(), filesInFolder[i].length());
+                    SearchFilesRecursiveAction task = new SearchFilesRecursiveAction(filesInFolder[i].getAbsolutePath(), minSize);
                     task.fork();
                     listTasks.add(task);
                 } else {
